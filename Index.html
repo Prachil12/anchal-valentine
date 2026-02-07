@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Anchal ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    z-index: 5;
+}
+
+/* Typewriter text */
+h1 {
+    color: white;
+    font-size: 2.6rem;
+    min-height: 90px;
+}
+
+/* Buttons */
+button {
+    font-size: 1.3rem;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #4CAF50;
+    color: white;
+    margin-right: 20px;
+}
+
+#noBtn {
+    background: #f44336;
+    color: white;
+    position: absolute;
+    animation: shake 0.4s infinite;
+}
+
+/* NO button shake */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: pink;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh) scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Firework hearts */
+.burst {
+    position: absolute;
+    font-size: 22px;
+    animation: burst 1.5s ease-out forwards;
+}
+
+@keyframes burst {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Music -->
+<audio id="bgMusic" loop>
+    <source src="hum-tum-kitne-paas-hain.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1 id="text"></h1>
+    <button id="yesBtn">YES 💕</button>
+    <button id="noBtn">NO 😜</button>
+</div>
+
+<script>
+/* TYPEWRITER */
+const message = "💖 Will you be my Valentine, Anchal? 💖";
+let i = 0;
+const textEl = document.getElementById("text");
+
+function typeText() {
+    if (i < message.length) {
+        textEl.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 70);
+    }
+}
+typeText();
+
+/* NO button escape */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+});
+
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = 15 + Math.random() * 20 + "px";
+    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+}
+setInterval(createHeart, 250);
+
+/* YES click */
+const yesBtn = document.getElementById("yesBtn");
+const music = document.getElementById("bgMusic");
+
+yesBtn.addEventListener("click", () => {
+    music.play();
+    fireworks();
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        background:linear-gradient(135deg,#ff758c,#ff7eb3);
+        color:white;
+        font-size:2.6rem;">
+        💕 YAYYYY!!! 😍<br>
+        I knew it 💖<br><br>
+        Happy Valentine’s Day, Anchal 🌹<br>
+        This is just the beginning ✨
+    </div>`;
+});
+
+/* Fireworks hearts */
+function fireworks() {
+    for (let i = 0; i < 50; i++) {
+        const burst = document.createElement("div");
+        burst.className = "burst";
+        burst.innerHTML = "💖";
+        burst.style.left = Math.random() * 100 + "vw";
+        burst.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 1500);
+    }
+}
+</script>
+
+</body>
+</html>
